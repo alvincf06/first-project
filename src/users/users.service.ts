@@ -5,13 +5,12 @@ import { CreateUserDto } from './dto/createUser.dto';
 
 @Injectable()
 export class UsersService {
-    constructor(
-        @InjectRepository(UserRepository)
-        private readonly userRepository:UserRepository){
+  constructor(
+    @InjectRepository(UserRepository)
+    private readonly userRepository: UserRepository,
+  ) {}
 
-    }
-
-    async createUser(createUserDto:CreateUserDto):Promise<void>{
-        return await this.userRepository.createUser(createUserDto);
-    }
+  async createUser(createUserDto: CreateUserDto): Promise<void> {
+    return await this.userRepository.createUser(createUserDto);
+  }
 }

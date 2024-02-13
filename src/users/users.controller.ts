@@ -4,12 +4,10 @@ import { CreateUserDto } from './dto/createUser.dto';
 
 @Controller('users')
 export class UsersController {
-    constructor(private readonly userService:UsersService){
+  constructor(private readonly userService: UsersService) {}
 
-    }
-
-    @Post()
-    async createUser(@Body() payload:CreateUserDto):Promise<void>{
-        return this.userService.createUser(payload);
-    }
+  @Post()
+  async createUser(@Body() payload: CreateUserDto): Promise<void> {
+    return this.userService.createUser(payload);
+  }
 }

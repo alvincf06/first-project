@@ -1,21 +1,19 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
+export class Book extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-export class Book extends BaseEntity{
-    @PrimaryGeneratedColumn('uuid')
-    id:string
+  @Column()
+  title: string;
 
-    @Column()
-    title:string
+  @Column()
+  author: string;
 
-    @Column()
-    author: string
+  @Column()
+  category: string;
 
-    @Column()
-    category: string
-
-    @Column()
-    year: number
-
+  @Column()
+  year: number;
 }

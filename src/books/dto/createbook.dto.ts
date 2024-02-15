@@ -1,18 +1,18 @@
-import { Type } from "class-transformer";
-import { IsInt, IsNotEmpty, } from "class-validator";
+import { Type } from 'class-transformer';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
-export class CreateBookDTO{
-    @IsNotEmpty()
-    title: string;
+export class CreateBookDTO {
+  @IsNotEmpty()
+  title: string;
 
-    @IsNotEmpty()
-    author: string;
+  @IsNotEmpty()
+  author: string;
 
-    @IsNotEmpty()
-    category: string;
+  @IsNotEmpty()
+  category: string;
 
-    @IsNotEmpty()
-    @IsInt()
-    @Type(() => Number)
-    year: number;
+  @IsNotEmpty()
+  @IsInt()
+  @Type(() => Number)
+  year: number;
 }

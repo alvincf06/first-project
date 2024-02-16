@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { RefreshTokenEntity } from 'src/auth/entity/refresh-token..entity';
 import { Book } from 'src/books/entity/books.entity';
 import { User } from 'src/users/entity/user.entity';
 
@@ -9,6 +10,6 @@ export const typeormConfig: TypeOrmModuleOptions = {
   username: 'root',
   password: '',
   database: 'first-project',
-  entities: [Book, User],
+  entities: [Book, User, RefreshTokenEntity],
   synchronize: true,
 };

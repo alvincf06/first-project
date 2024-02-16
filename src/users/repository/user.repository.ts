@@ -1,4 +1,4 @@
-import { DataSource, EntityRepository, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { User } from '../entity/user.entity';
 import { CreateUserDto } from '../dto/createUser.dto';
 import * as bcrypt from 'bcrypt';
@@ -24,5 +24,14 @@ export class UserRepository extends Repository<User> {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async validateUser(email: string, password: string): Promise<User> {
+    const user = await this.findOne({ where: { email } });
+
+    if (user && (await user.validatePassword(password))) {
+      return user;
+    }
+    return null;
   }
 }

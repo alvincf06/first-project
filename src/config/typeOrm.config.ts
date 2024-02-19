@@ -11,5 +11,5 @@ export const typeormConfig: TypeOrmModuleOptions = {
   password: '',
   database: 'first-project',
   entities: [__dirname + '/../**/*.entity.{ts,js}'],
-  synchronize: true,
+  synchronize: false,
 };

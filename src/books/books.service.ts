@@ -19,21 +19,21 @@ export class BooksService {
     return await this.bookRepository.getBook(user, filter);
   }
 
-  async createBook(createTodoDTO: CreateBookDTO): Promise<void> {
-    return await this.bookRepository.createBook(createTodoDTO);
+  async createBook(user: User, createTodoDTO: CreateBookDTO): Promise<void> {
+    return await this.bookRepository.createBook(user, createTodoDTO);
   }
 
-  async getBookById(id: string): Promise<Book> {
-    const book = await this.bookRepository.findOne({ where: { id: id } });
+  async getBookById(user: User, id: string): Promise<Book> {
+    const book = await this.bookRepository.findOne({ where: { id: id, user: user }, } );
     if (!book) {
       throw new NotFoundException(`Book with id ${id} is not found`);
     }
     return book;
   }
 
-  async updateBook(id: string, UpdateBookDTO): Promise<void> {
+  async updateBook(user: User, id: string, UpdateBookDTO): Promise<void> {
     const { title, author, category, year } = UpdateBookDTO;
-    const book = await this.getBookById(id);
+    const book = await this.getBookById(user, id);
 
     book.title = title;
     book.author = author;

@@ -28,10 +28,10 @@ export class BooksController {
     this.BooksService = BooksService;
   }
 
-  // @Get('/:id')
-  // async getBook(@Param('id', UUIDValidationPipe) id: string): Promise<Book> {
-  //   return this.BooksService.getBookById(id);
-  // }
+  @Get('/:id')
+  async getBook(@GetUser() user: User,@Param('id', UUIDValidationPipe) id: string): Promise<Book> {
+    return this.BooksService.getBookById(user, id);
+  }
 
   @Get()
   async getBooks(
@@ -49,15 +49,16 @@ export class BooksController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  async createBook(@Body() payload: CreateBookDTO): Promise<void> {
-    return this.BooksService.createBook(payload);
+  async createBook(@GetUser()user: User, @Body() payload: CreateBookDTO): Promise<void> {
+    return this.BooksService.createBook(user, payload);
   }
 
   @Put('/:id')
   async updateBook(
     @Param('id', UUIDValidationPipe) id: string,
     @Body() payload: UpdateBookDTO,
+    @GetUser() user: User,
   ): Promise<void> {
-    return this.BooksService.updateBook(id, payload);
+    return this.BooksService.updateBook(user, id, payload);
   }
 }

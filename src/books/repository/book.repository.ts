@@ -3,14 +3,17 @@ import { Book } from '../entity/books.entity';
 import { FilterBookDto } from '../dto/filterbook.dto';
 import { CreateBookDTO } from '../dto/createbook.dto';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { User } from 'src/users/entity/user.entity';
 @Injectable()
 export class BookRepository extends Repository<Book> {
   constructor(private dataSource: DataSource) {
     super(Book, dataSource.createEntityManager());
   }
-  async getBook(filter: FilterBookDto): Promise<Book[]> {
+  async getBook(user: User,filter: FilterBookDto): Promise<Book[]> {
     const { title, author, category, min_year, max_year } = filter;
-    const query = this.createQueryBuilder('book');
+    const query = this.createQueryBuilder('book')
+                  .where('book.userId = :userId', {userId: user.id})
+
     if (title) {
       query.andWhere('lower(book.title) LIKE :title', {
         title: `%${title.toLowerCase()}%`,

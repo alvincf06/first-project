@@ -7,6 +7,7 @@ import { UsersModule } from 'src/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RefreshTokenRepository } from './repository/refresh-token.repository';
 import { RefreshTokenEntity } from './entity/refresh-token..entity';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { RefreshTokenEntity } from './entity/refresh-token..entity';
     TypeOrmModule.forFeature([RefreshTokenEntity]),
     UsersModule,
   ],
-  providers: [AuthService, RefreshTokenRepository],
+  providers: [AuthService, RefreshTokenRepository, JwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

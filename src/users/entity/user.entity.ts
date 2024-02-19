@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { RefreshTokenEntity } from 'src/auth/entity/refresh-token..entity';
+import { Book } from 'src/books/entity/books.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -25,6 +26,9 @@ export class User extends BaseEntity {
 
   @Column()
   salt: string;
+
+  @OneToMany(() => Book, (book) => book.user)
+  books: Book[];
 
   @OneToMany(() => RefreshTokenEntity, (refreshToken) => refreshToken.user)
   refreshTokens: RefreshTokenEntity[];

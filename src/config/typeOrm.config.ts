@@ -10,6 +10,6 @@ export const typeormConfig: TypeOrmModuleOptions = {
   username: 'root',
   password: '',
   database: 'first-project',
-  entities: [Book, User, RefreshTokenEntity],
+  entities: [__dirname + '/../**/*.entity.{ts,js}'],
   synchronize: true,
 };
